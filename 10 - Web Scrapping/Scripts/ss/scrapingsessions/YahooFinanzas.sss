@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scraping-session use-strict-mode="true" use-only-sslv3="false"><script-instances><script-instances when-to-run="10" sequence="1" enabled="true"><script><script-text>String workingDir = "E:/GitViews/webextdemo/";
+String stockName = "VITROA.MX";//BIMBOA.MX
+session.setVariable("stockName", stockName);
+String[] header = {"fecha", "pApertura", "maxima", "baja", "cierre", "volumen", "cierreajustado"};
+int totalColumns = header.length;
+session.setVariable("totalColumns", totalColumns);
+File theOutputFile = new File(workingDir+"Datos/"+stockName+"precios.csv");
+//Cleans any previous file
+theOutputFile.delete();
+CsvWriter writer = new CsvWriter(theOutputFile.getAbsolutePath());
+writer.setHeader(header);
+session.setVariable("theWriter", writer);
+//Execute Scrapable file
+//session.scrapeFile("ACCION");
+</script-text><name>IniciarVariables</name><language>Interpreted Java</language></script></script-instances><script-instances when-to-run="20" sequence="2" enabled="true"><script><script-text>CsvWriter writer = session.getVariable("theWriter");
+writer.close();</script-text><name>CerrarVariables</name><language>Interpreted Java</language></script></script-instances><owner-type>ScrapingSession</owner-type><owner-name>YahooFinanzas</owner-name></script-instances><name>YahooFinanzas</name><notes></notes><cookiePolicy>0</cookiePolicy><HTTPClientType>0</HTTPClientType><maxHTTPRequests>1</maxHTTPRequests><external_proxy_username></external_proxy_username><external_proxy_password></external_proxy_password><external_proxy_host></external_proxy_host><external_proxy_port></external_proxy_port><external_nt_proxy_username></external_nt_proxy_username><external_nt_proxy_password></external_nt_proxy_password><external_nt_proxy_domain></external_nt_proxy_domain><external_nt_proxy_host></external_nt_proxy_host><anonymize>false</anonymize><terminate_proxies_on_completion>false</terminate_proxies_on_completion><number_of_required_proxies>5</number_of_required_proxies><originator_edition>2</originator_edition><logging_level>2</logging_level><date_exported>noviembre 28, 2016 15:27:22</date_exported><character_set>UTF-8</character_set><created_by_version>7.0</created_by_version><scrapeable-files sequence="1" will-be-invoked-manually="false" tidy-html="jtidy"><last-scraped-data></last-scraped-data><URL>https://es-us.finanzas.yahoo.com/q/hp</URL><last-request></last-request><name>ACCION</name><extractor-patterns sequence="1" automatically-save-in-session-variable="false" if-saved-in-session-variable="0" filter-duplicates="false" cache-data-set="false" will-be-invoked-manually="false"><pattern-text>&lt;tr&gt;
+&lt;td class="yfnc_tabledata1" nowrap="nowrap" align="right"&gt;~@laFecha@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@precioApertura@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@maxima@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@baja@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@cierre@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@volumen@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@cierreAjustado@~&lt;/td&gt;
+&lt;/tr&gt;
+</pattern-text><identifier>precios</identifier><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="true" sequence="1"><regular-expression>.*?</regular-expression><identifier>laFecha</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="6"><regular-expression>.*?</regular-expression><identifier>volumen</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="2"><regular-expression>.*?</regular-expression><identifier>precioApertura</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="4"><regular-expression>.*?</regular-expression><identifier>baja</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="3"><regular-expression>.*?</regular-expression><identifier>maxima</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="5"><regular-expression>.*?</regular-expression><identifier>cierre</identifier></extractor-pattern-tokens><extractor-pattern-tokens optional="false" save-in-session-variable="true" compound-key="true" strip-html="true" resolve-relative-url="false" replace-html-entities="true" trim-white-space="true" exclude-from-data="false" null-session-variable="false" sequence="7"><regular-expression>.*?</regular-expression><identifier>cierreAjustado</identifier></extractor-pattern-tokens><script-instances><script-instances when-to-run="80" sequence="1" enabled="true"><script><script-text>CsvWriter writer = session.getVariable("theWriter");
+int totalColumns = session.getVariable("totalColumns");
+String []outs = new String [totalColumns];
+/*
+&lt;td class="yfnc_tabledata1" nowrap="nowrap" align="right"&gt;~@laFecha@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@precioApertura@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@maxima@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@baja@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@cierre@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@volumen@~&lt;/td&gt;
+&lt;td class="yfnc_tabledata1" align="right"&gt;~@cierreAjustado@~&lt;/td&gt;
+*/
+outs [0] = session.getVariable( "laFecha" );
+outs [1] = session.getVariable( "precioApertura" );
+outs [2] = session.getVariable( "maxima" );
+outs [3] = session.getVariable( "baja" );
+outs [4] = session.getVariable( "cierre" );
+outs [5] = session.getVariable( "volumen" );
+outs [6] = session.getVariable( "cierreAjustado");
+writer.write(outs);
+writer.flush();
+
+// Output a message to the log so we know that we'll be writing the text out to a file.
+session.log( "Writing data to a file." ); // Tip: You can also use log.debug( message )
+
+</script-text><name>GuardarPreciosAccion</name><language>Interpreted Java</language></script></script-instances><owner-type>ExtractorPattern</owner-type><owner-name>precios</owner-name></script-instances></extractor-patterns><HTTPParameters sequence="4"><key>c</key><type>GET</type><value>2008</value></HTTPParameters><HTTPParameters sequence="8"><key>g</key><type>GET</type><value>d</value></HTTPParameters><HTTPParameters sequence="3"><key>b</key><type>GET</type><value>24</value></HTTPParameters><HTTPParameters sequence="6"><key>e</key><type>GET</type><value>24</value></HTTPParameters><HTTPParameters sequence="7"><key>f</key><type>GET</type><value>2016</value></HTTPParameters><HTTPParameters sequence="5"><key>d</key><type>GET</type><value>10</value></HTTPParameters><HTTPParameters sequence="1"><key>s</key><type>GET</type><value>~#stockName#~</value></HTTPParameters><HTTPParameters sequence="2"><key>a</key><type>GET</type><value>10</value></HTTPParameters><script-instances><owner-type>ScrapeableFile</owner-type><owner-name>ACCION</owner-name></script-instances></scrapeable-files></scraping-session>

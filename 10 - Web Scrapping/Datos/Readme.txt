@@ -1,0 +1,1 @@
+Este archivo es sólo para crear la carpeta Datos en Git.

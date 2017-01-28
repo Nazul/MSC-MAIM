@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script overwrite-on-import="true"><script-text>String workingDir = "E:/GitViews/webextdemo/";
+String stockName = "VITROA.MX";//BIMBOA.MX
+session.setVariable("stockName", stockName);
+String[] header = {"fecha", "pApertura", "maxima", "baja", "cierre", "volumen", "cierreajustado"};
+int totalColumns = header.length;
+session.setVariable("totalColumns", totalColumns);
+File theOutputFile = new File(workingDir+"Datos/"+stockName+"precios.csv");
+//Cleans any previous file
+theOutputFile.delete();
+CsvWriter writer = new CsvWriter(theOutputFile.getAbsolutePath());
+writer.setHeader(header);
+session.setVariable("theWriter", writer);
+//Execute Scrapable file
+//session.scrapeFile("ACCION");
+</script-text><name>IniciarVariables</name><language>Interpreted Java</language><date_exported>noviembre 28, 2016 15:06:58</date_exported></script>
